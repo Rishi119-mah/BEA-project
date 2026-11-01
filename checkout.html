@@ -2,10 +2,10 @@
 <html>
 
 <head>
-  <title>Checkout</title>
-
+  <title>OCTANE — Checkout</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Review your order and place it.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,18 +20,22 @@
   <div class="checkout-header">
     <div class="header-content">
       <div class="checkout-header-left-section">
-        <a href="amazon.html">
-          <img class="amazon-logo" src="images/amazon-logo.png">
-          <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
+        <a href="amazon.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #ff5e14 0%, #ff8c3b 100%); display: flex; align-items: center; justify-content: center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 1.5px; color: #111827;">OCTANE</span>
         </a>
       </div>
 
       <div class="checkout-header-middle-section">
-        Checkout (<a class="return-to-home-link" href="amazon.html">3 items</a>)
+        Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html">0 items</a>)
       </div>
 
       <div class="checkout-header-right-section">
-        <img src="images/icons/checkout-lock-icon.png">
+        <img src="images/icons/checkout-lock-icon.png" alt="Secure checkout">
       </div>
     </div>
   </div>
@@ -41,7 +45,6 @@
 
     <div class="checkout-grid">
       <div class="order-summary">
-
       </div>
 
       <div class="payment-summary">
@@ -50,32 +53,31 @@
         </div>
 
         <div class="payment-summary-row">
-          <div class="js-items-label">Items (3):</div>
-          <div class="payment-summary-money js-items-total">$</div>
+          <div class="js-items-label">Items (0):</div>
+          <div class="payment-summary-money js-items-total">$0.00</div>
         </div>
 
         <div class="payment-summary-row">
           <div>Shipping &amp; handling:</div>
-          <div class="payment-summary-money js-shipping-total">$</div>
+          <div class="payment-summary-money js-shipping-total">$0.00</div>
         </div>
 
         <div class="payment-summary-row subtotal-row">
           <div>Total before tax:</div>
-          <div class="payment-summary-money js-subtotal">$</div>
+          <div class="payment-summary-money js-subtotal">$0.00</div>
         </div>
 
         <div class="payment-summary-row">
           <div>Estimated tax (10%):</div>
-          <div class="payment-summary-money js-estimated-tax">$</div>
+          <div class="payment-summary-money js-estimated-tax">$0.00</div>
         </div>
 
         <div class="payment-summary-row total-row">
           <div>Order total:</div>
-          <div class="payment-summary-money js-order-total">$</div>
+          <div class="payment-summary-money js-order-total">$0.00</div>
         </div>
 
-
-        <button class="place-order-button button-primary">
+        <button class="place-order-button button-primary js-place-order-button">
           Place your order
         </button>
       </div>

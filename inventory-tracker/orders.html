@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvenTrack — Orders</title>
+  <meta name="description" content="Log outgoing orders with automatic stock deduction.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <button class="mobile-toggle">☰</button>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h2>Outgoing Orders</h2>
+          <p>Log orders — stock is automatically deducted</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary" onclick="DB.downloadCSV(DB.exportOrdersCSV(), 'orders-report.csv')">
+            📥 Export CSV
+          </button>
+          <button class="btn btn-primary" onclick="openOrderModal()">＋ New Order</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="orderStats"></div>
+
+      <!-- Orders Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📋 Order History</h3>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Order Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal" style="max-width:600px">
+      <div class="modal-header">
+        <h3>Create New Order</h3>
+        <button class="modal-close" onclick="closeModal('orderModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Customer Name</label>
+          <input type="text" class="form-input" id="orderCustomer" placeholder="e.g. John Doe">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Order Items</label>
+          <div id="orderItemsList" class="order-items-list mb-16"></div>
+          <div class="order-item-add-row">
+            <div class="form-group">
+              <select class="form-select" id="addItemProduct">
+                <option value="">Select product</option>
+              </select>
+            </div>
+            <div class="form-group" style="max-width:100px">
+              <input type="number" class="form-input" id="addItemQty" min="1" value="1" placeholder="Qty">
+            </div>
+            <button class="btn btn-sm btn-secondary" onclick="addOrderItem()" style="margin-bottom:20px">Add</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <textarea class="form-textarea" id="orderNotes" placeholder="Order notes..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div style="flex:1;font-weight:600;font-size:16px" id="orderTotalDisplay">Total: $0.00</div>
+        <button class="btn btn-secondary" onclick="closeModal('orderModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div class="modal-overlay" id="orderDetailModal">
+    <div class="modal" style="max-width:550px">
+      <div class="modal-header">
+        <h3>Order Details</h3>
+        <button class="modal-close" onclick="closeModal('orderDetailModal')">×</button>
+      </div>
+      <div class="modal-body" id="orderDetailBody"></div>
+    </div>
+  </div>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/orders.js"></script>
+</body>
+</html>

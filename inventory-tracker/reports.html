@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvenTrack — Reports & Analytics</title>
+  <meta name="description" content="Generate and export warehouse inventory, order, shipment, and stock alert reports.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <button class="mobile-toggle">☰</button>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h2>Reports & Analytics</h2>
+          <p>Export data, analyze stock health, and monitor business performance</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary" onclick="exportAllReports()">📥 Export All Data (ZIP/CSV)</button>
+        </div>
+      </div>
+
+      <!-- Quick Export Cards -->
+      <div class="stats-grid">
+        <div class="stat-card" style="cursor: pointer;" onclick="downloadReport('products')">
+          <div class="stat-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">📦</div>
+          <div class="stat-info">
+            <h3>Products Catalog</h3>
+            <p>Full item list with SKUs & pricing</p>
+            <button class="btn btn-sm btn-primary" style="margin-top: 10px;">Download CSV</button>
+          </div>
+        </div>
+
+        <div class="stat-card" style="cursor: pointer;" onclick="downloadReport('low-stock')">
+          <div class="stat-icon" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">⚠️</div>
+          <div class="stat-info">
+            <h3>Low Stock Report</h3>
+            <p id="lowStockCardSub">Items below reorder threshold</p>
+            <button class="btn btn-sm btn-primary" style="margin-top: 10px; background: var(--danger);">Download CSV</button>
+          </div>
+        </div>
+
+        <div class="stat-card" style="cursor: pointer;" onclick="downloadReport('orders')">
+          <div class="stat-icon" style="background: rgba(34, 197, 94, 0.15); color: #4ade80;">🛒</div>
+          <div class="stat-info">
+            <h3>Orders History</h3>
+            <p>Outgoing sales & customer orders</p>
+            <button class="btn btn-sm btn-primary" style="margin-top: 10px;">Download CSV</button>
+          </div>
+        </div>
+
+        <div class="stat-card" style="cursor: pointer;" onclick="downloadReport('shipments')">
+          <div class="stat-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">🚚</div>
+          <div class="stat-info">
+            <h3>Shipments Log</h3>
+            <p>Incoming restocks & supplier records</p>
+            <button class="btn btn-sm btn-primary" style="margin-top: 10px;">Download CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Health Breakdown -->
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3>📊 Category Stock Valuation</h3>
+          </div>
+          <div class="card-body">
+            <div id="categoryBreakdown" style="display: flex; flex-direction: column; gap: 14px;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>💼 Warehouse Summary</h3>
+          </div>
+          <div class="card-body">
+            <div id="warehouseSummary" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Critical Stock Items Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3>🚨 Critical Stock Alert Analysis</h3>
+          <button class="btn btn-sm btn-primary" onclick="downloadReport('low-stock')">Export Alert Report</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Current Stock</th>
+                <th>Threshold</th>
+                <th>Deficit</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="lowStockReportTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/reports.js"></script>
+</body>
+</html>

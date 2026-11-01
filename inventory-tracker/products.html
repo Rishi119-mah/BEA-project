@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvenTrack — Products</title>
+  <meta name="description" content="Manage your product catalog with SKUs, categories, and reorder thresholds.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <button class="mobile-toggle">☰</button>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h2>Product Catalog</h2>
+          <p>Manage your inventory items</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary" onclick="DB.downloadCSV(DB.exportProductsCSV(), 'products-inventory.csv')">
+            📥 Export CSV
+          </button>
+          <button class="btn btn-primary" onclick="openAddProductModal()">＋ Add Product</button>
+        </div>
+      </div>
+
+      <!-- Search & Filter -->
+      <div class="search-filter-bar">
+        <div class="search-wrapper">
+          <span class="search-icon-input">🔍</span>
+          <input type="text" class="form-input" id="searchInput" placeholder="Search by name, SKU, or category..." oninput="renderProducts()">
+        </div>
+        <select class="form-select" id="categoryFilter" onchange="renderProducts()" style="width:180px">
+          <option value="">All Categories</option>
+        </select>
+        <select class="form-select" id="statusFilter" onchange="renderProducts()" style="width:150px">
+          <option value="">All Status</option>
+          <option value="in-stock">In Stock</option>
+          <option value="low-stock">Low Stock</option>
+          <option value="out-of-stock">Out of Stock</option>
+        </select>
+      </div>
+
+      <!-- Products Table -->
+      <div class="card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Reorder At</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="productModalTitle">Add Product</h3>
+        <button class="modal-close" onclick="closeModal('productModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editProductId">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">SKU *</label>
+            <input type="text" class="form-input" id="productSku" placeholder="e.g. ELEC-001">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-select" id="productCategory">
+              <option value="">Select category</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Food & Beverage">Food & Beverage</option>
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Tools & Hardware">Tools & Hardware</option>
+              <option value="Health & Beauty">Health & Beauty</option>
+              <option value="Home & Garden">Home & Garden</option>
+              <option value="Automotive">Automotive</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Product Name *</label>
+          <input type="text" class="form-input" id="productName" placeholder="e.g. Wireless Bluetooth Headphones">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Price ($) *</label>
+            <input type="number" class="form-input" id="productPrice" step="0.01" min="0" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock Quantity</label>
+            <input type="number" class="form-input" id="productStock" min="0" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Reorder Threshold</label>
+          <input type="number" class="form-input" id="productThreshold" min="0" placeholder="10" value="10">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('productModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal" style="max-width:400px">
+      <div class="modal-header">
+        <h3>Delete Product</h3>
+        <button class="modal-close" onclick="closeModal('deleteModal')">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="deleteProductName"></strong>? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/products.js"></script>
+</body>
+</html>

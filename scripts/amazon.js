@@ -90,8 +90,4 @@ let cartBtns = document.querySelectorAll('.js-add-to-cart');
     });
   });
  
-
-
-
-
 const searchBar = document.querySelector(".search-bar");

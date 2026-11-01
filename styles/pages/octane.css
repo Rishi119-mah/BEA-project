@@ -1,0 +1,396 @@
+/* ============================================
+   OCTANE — Premium Storefront Page Styles
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap');
+
+:root {
+  --octane-bg: #090c13;
+  --octane-surface: #111622;
+  --octane-card: #141a29;
+  --octane-card-hover: #192133;
+  --octane-border: rgba(255, 255, 255, 0.08);
+  --octane-border-glow: rgba(255, 94, 20, 0.4);
+  --octane-primary: #ff5e14;
+  --octane-primary-glow: rgba(255, 94, 20, 0.35);
+  --octane-primary-gradient: linear-gradient(135deg, #ff5e14 0%, #ff8c3b 100%);
+  --octane-accent: #6366f1;
+  --octane-text-primary: #f8fafc;
+  --octane-text-secondary: #94a3b8;
+  --octane-text-muted: #64748b;
+  --octane-radius: 16px;
+}
+
+body {
+  background-color: var(--octane-bg);
+  color: var(--octane-text-primary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Ambient Glows */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 94, 20, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main {
+  margin-top: 72px;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Hero Banner Section --- */
+.octane-hero {
+  position: relative;
+  padding: 48px 24px 36px;
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.octane-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 94, 20, 0.12);
+  border: 1px solid rgba(255, 94, 20, 0.3);
+  color: #ff8c3b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.octane-hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 70%, #ff8c3b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.octane-hero p {
+  color: var(--octane-text-secondary);
+  font-size: clamp(15px, 2vw, 18px);
+  max-width: 650px;
+  margin: 0 auto 28px;
+}
+
+/* Category Filter Bar */
+.octane-categories-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.cat-chip {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--octane-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cat-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.cat-chip.active {
+  background: var(--octane-primary-gradient);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 94, 20, 0.4);
+}
+
+/* --- Products Grid Layout --- */
+.products-grid,
+.js-products-grid,
+.js-producs-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 24px !important;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px 60px !important;
+  box-sizing: border-box;
+}
+
+/* --- Product Card Design --- */
+.product-container {
+  background: var(--octane-card);
+  border: 1px solid var(--octane-border);
+  border-radius: var(--octane-radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.product-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.product-container:hover {
+  background: var(--octane-card-hover);
+  border-color: var(--octane-border-glow);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 94, 20, 0.15);
+}
+
+.product-container:hover::before {
+  background: var(--octane-primary-gradient);
+}
+
+/* Image Container */
+.product-image-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease;
+}
+
+.product-container:hover .product-image-container img {
+  transform: scale(1.05);
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+/* Product Info */
+.product-name {
+  color: var(--octane-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  height: 40px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Rating */
+.product-rating-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.product-rating-stars {
+  height: 18px;
+  filter: hue-rotate(15deg) saturate(1.2);
+}
+
+.product-rating-count {
+  font-size: 12px;
+  color: var(--octane-text-muted);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* Price */
+.product-price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.product-price::before {
+  content: '';
+}
+
+/* Quantity Selector */
+.product-quantity-container {
+  margin-bottom: 14px;
+}
+
+.product-quantity-container select,
+.js-quantity-select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--octane-border);
+  color: var(--octane-text-primary);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.product-quantity-container select:focus {
+  border-color: var(--octane-primary);
+}
+
+.product-quantity-container select option {
+  background: #1a202c;
+  color: #ffffff;
+}
+
+.product-spacer {
+  flex-grow: 1;
+}
+
+/* Added Message Toast */
+.added-to-cart {
+  color: #22c55e;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+  height: 20px;
+}
+
+.added-to-cart.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.added-to-cart img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Add to Cart Button */
+.add-to-cart-button,
+.button-primary {
+  width: 100%;
+  height: 44px;
+  background: var(--octane-primary-gradient) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 14px rgba(255, 94, 20, 0.35) !important;
+  box-sizing: border-box;
+}
+
+.add-to-cart-button:hover,
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 94, 20, 0.5) !important;
+  filter: brightness(1.08);
+}
+
+.add-to-cart-button:active,
+.button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 94, 20, 0.4) !important;
+}
+
+/* --- Footer --- */
+.octane-footer {
+  border-top: 1px solid var(--octane-border);
+  background: rgba(14, 18, 27, 0.8);
+  padding: 40px 24px;
+  text-align: center;
+  margin-top: 60px;
+  color: var(--octane-text-muted);
+  font-size: 13px;
+}
+
+.octane-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.octane-footer-links a {
+  color: var(--octane-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.octane-footer-links a:hover {
+  color: var(--octane-primary);
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvenTrack — Dashboard</title>
+  <meta name="description" content="Lightweight inventory and warehouse tracker dashboard with stock alerts.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <button class="mobile-toggle">☰</button>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h2>Dashboard</h2>
+          <p>Overview of your warehouse at a glance</p>
+        </div>
+        <div class="header-actions">
+          <a href="products.html" class="btn btn-primary">＋ Add Product</a>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Low Stock Alerts -->
+        <div class="card">
+          <div class="card-header">
+            <h3>⚠️ Stock Alerts</h3>
+            <a href="reports.html" class="btn btn-sm btn-secondary">View Report</a>
+          </div>
+          <div class="card-body">
+            <div class="alert-list" id="alertList"></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+          <div class="card-header">
+            <h3>📋 Recent Activity</h3>
+          </div>
+          <div class="card-body">
+            <div class="alert-list" id="activityList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Products Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📦 Inventory Overview</h3>
+          <a href="products.html" class="btn btn-sm btn-secondary">View All</a>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="productsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/dashboard.js"></script>
+</body>
+</html>
